@@ -4,7 +4,7 @@ const app = express();
 const admin = require('firebase-admin');
 const serviceAccount = require("./reddit-49d37-f112414138be.json");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -26,6 +26,20 @@ app.get('/fetchRedditData', async (req, res) => {
         res.json(redditData);
     } catch (error) {
         console.error('Error fetching data from Reddit:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/getFirebaseData', async (req, res) => {
+    try {
+        const db = admin.database();
+        const ref = db.ref('/redditData');
+        const snapshot = await ref.once('value');
+        const firebaseData = snapshot.val();
+
+        res.json(firebaseData);
+    } catch (error) {
+        console.error('Error fetching data from Firebase:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
