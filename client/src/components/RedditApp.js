@@ -7,7 +7,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [after, setAfter] = useState('');
   const [hasMore, setHasMore] = useState(true);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(2);
 
   const fetchData = async () => {
     try {
@@ -75,7 +75,7 @@ const App = () => {
       dataIndex: 'title',
       key: 'title',
     },
-    
+
     {
       title: 'Score',
       dataIndex: 'score',
@@ -95,7 +95,7 @@ const App = () => {
           href={text}
           target="_blank"
           rel="noopener noreferrer"
-          style={{ fontSize: '8px',}}
+          style={{ fontSize: '8px', }}
         >
           {text}
         </a>
@@ -109,7 +109,7 @@ const App = () => {
         <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: color }}></div>
       ),
     },
-    
+
   ];
 
   return (
